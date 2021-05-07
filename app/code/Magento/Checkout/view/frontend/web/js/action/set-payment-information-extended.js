@@ -55,7 +55,11 @@ define([
             serviceUrl = urlBuilder.createUrl('/guest-carts/:cartId/set-payment-information', {
                 cartId: quote.getQuoteId()
             });
-            payload.email = quote.guestEmail;
+            if (quote.guestEmail) {
+                payload.email = quote.guestEmail;
+            } else {
+                return;
+            }
         } else {
             serviceUrl = urlBuilder.createUrl('/carts/mine/set-payment-information', {});
         }
